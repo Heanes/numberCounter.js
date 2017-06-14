@@ -15,8 +15,8 @@ html{
 html,body{margin:0;padding:0;}
 /****************************** 页面样式 ******************************/
 $demoWidth: 680px;
-.number-counter-demo{width:$demoWidth;margin:30px;text-align:center;}
+.number-counter-demo{width:$demoWidth;margin:30px auto;text-align:center;}
 /* 在此处重写数值展示样式 */
 .number-counter-wrap .number-value{margin-right:10px;width:60px;height:80px;}
 
-.demo-handle{width:$demoWidth;text-align:center;}
+.demo-handle{width:$demoWidth;text-align:center;margin:0 auto;}

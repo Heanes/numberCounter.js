@@ -19,7 +19,7 @@ html, body {
 /****************************** 页面样式 ******************************/
 .number-counter-demo {
   width: 680px;
-  margin: 30px;
+  margin: 30px auto;
   text-align: center; }
 
 /* 在此处重写数值展示样式 */
@@ -30,6 +30,7 @@ html, body {
 
 .demo-handle {
   width: 680px;
-  text-align: center; }
+  text-align: center;
+  margin: 0 auto; }
 
 /*# sourceMappingURL=demo.css.map */
