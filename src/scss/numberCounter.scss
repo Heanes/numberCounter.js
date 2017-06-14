@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/**
+ * @doc 计数器样式文件
+ * @author Heanes
+ * @time 2017-06-14 11:42:08
+ */
+
+.number-counter-wrap{
+  font-size:0;
+}
+.number-value{
+  display:inline-block;
+  width:30px;
+  height:40px;
+}
+@for $i from 0 through 9 {
+  .number-value-#{$i}{
+    background: #fff url(../image/numberStyle1/#{$i}.png) no-repeat center top;
+    background-size: cover;
+  }
+}
