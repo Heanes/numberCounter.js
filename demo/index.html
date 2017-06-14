@@ -13,18 +13,27 @@
 </head>
 <body>
 <div class="wrap">
-    <div class="number-counter-demo">
-        <div class="number-counter-wrap">
-            <span class="number-value number-value-0">0</span>
-            <span class="number-value number-value-2">2</span>
-        </div>
+    <div class="number-counter-demo"></div>
+    <div class="demo-handle">
+        <input type="text" placeholder="请输入数值后改变" value="137845848" id="handleValue"/>
+        <button type="button" id="handleBtn">确定</button>
     </div>
 </div>
 <script type="text/javascript" src="../resource/js/jquery.2.2.4.min.js"></script>
-<script type="text/javascript" src="../src/js/nubmerCounter.js"></script>
+<script type="text/javascript" src="../src/js/nubmerCounter.min.js"></script>
 <script type="text/javascript">
     $(function () {
-        ;
+        var $numberCounterDemo = $('.number-counter-demo');
+        var $handleValue = $('#handleValue');
+
+        $numberCounterDemo.numberCounter({
+            value: $handleValue.val()
+        });
+
+        $('#handleBtn').on('click', function () {
+            $numberCounterDemo.numberCounter('setValue', $handleValue.val());
+        });
+
     });
 </script>
 </body>

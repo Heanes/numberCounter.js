@@ -9,37 +9,79 @@
     var pluginName = 'numberCounter';
     var _default = {};
     _default.setting = {
-        setMaxNumber: false,    // 是否设置最大数
-        maxNumber: 100000,      // 最大计数数字
-        initValue: 0,           // 初始化显示的数值
-        delayMillisecond: 500,  // 计数翻动时的动画延时(毫秒单位)
+        setMaxNumber: false,                // 是否设置最大数
+        maxNumber: 100000,                  // 最大计数数字
+        numberValueStyle: 'number-value',   // 数值展示的样式
+        value: 0,                           // 初始化显示的数值
+        delayMillisecond: 500,              // 计数翻动时的动画延时(毫秒单位)
     };
 
     var NumberCounter = function (element, options) {
-        this.element = element;
-        this.settings = $.extend({}, _default.setting, options);
+        this.$element = $(element);
         this._defaults = _default;
         this._name = pluginName;
         this.version = 'v1.0.0';
-        this.init();
-    }
+        this.init(options);
+        return {
+            // Options (public access)
+            options: this.options,
+
+            // Initialize / destroy methods
+            init:                   $.proxy(this.init, this),
+            remove:                 $.proxy(this.remove, this),
+
+            // Method
+            setValue:               $.proxy(this.setValue, this),
+
+            // prepare use
+            test:                   $.proxy(this.test, this)
+        };
+    };
 
     NumberCounter.prototype = {
         init: function (options) {
-            ;
+            this.options = $.extend(true, {}, _default.setting, options);
+            this.render()
         },
 
-        createContainer: function (options) {
-            var $container = $('<div class="number-counter-wrap">');
+        createContainer: function () {
+            var $container = $(this.template.numberCounterWrap);
             return $container;
         },
 
-        getValue: function (options) {
-            ;
+        buildNumber: function (value) {
+            var $numbers = $('<div>');
+            value += '';
+
+            for(var i = 0, length = value.length; i < length; i++){
+                var $number = $(this.template.number);
+                $number.addClass(this.options.numberValueStyle + '-' + value[i]);
+                $numbers.append($number);
+            }
+
+            return $numbers.children();
         },
 
-        setValue: function (options) {
-            ;
+        render: function () {
+            this.$element.empty().append(this.createContainer().append(this.buildNumber(this.options.value)));
+        },
+
+        getValue: function (options) {
+            return this.options.value;
+        },
+
+        setValue: function (value) {
+            this.options.value = value;
+            this.render();
+            return this;
+        },
+
+        /**
+         * @doc 模版
+         */
+        template: {
+            numberCounterWrap:  '<div class="number-counter-wrap"></div>',
+            number:             '<span class="number-value"></span>'
         }
     };
 
